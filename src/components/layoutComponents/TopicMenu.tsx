@@ -34,7 +34,8 @@ export default function TopicMenu({
                     paddingLeft: "5px",
                   }}
                   key={100 + i}
-                  l={e.link}
+                  
+                  // l={e.link}
                   onClick={(ev) => {
                     changeSelectedKey(ev, e.link);
                   }}
@@ -51,7 +52,7 @@ export default function TopicMenu({
               paddingLeft: "5px",
             }}
             key={index}
-            l={topic.link}
+            // l={topic.link}
             onClick={(e) => {
               changeSelectedKey(e);
             }}

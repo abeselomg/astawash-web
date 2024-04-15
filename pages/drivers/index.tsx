@@ -30,13 +30,13 @@ const Users: React.FC = () => {
       });
   };
 
-  const deleteDriver = async (id) => {
+  const deleteDriver = async (id: string) => {
     axios({
       method: "delete",
       url: `${URLst}organization_users/${id}`,
     })
       .then((res) => {
-        setUsers(users.filter((e) => e.id != id));
+        setUsers(users.filter((e: any) => e.id != id));
         console.log(" ", res.data);
       })
       .catch((err) => {
@@ -63,7 +63,7 @@ const Users: React.FC = () => {
     {
       title: "",
       dataIndex: "",
-      render: (data, rec) => (
+      render: (data: any, rec: any) => (
         <Button
           type="primary"
           danger

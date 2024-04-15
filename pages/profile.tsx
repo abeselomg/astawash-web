@@ -29,12 +29,12 @@ function Profile() {
       });
   };
 
-  const updateProfile = async (data) => {
+  const updateProfile = async (data: any) => {
     let orgId = localStorage.getItem("orgId");
     axios({
       method: "patch",
       url: `${URLst}organization/${orgId}`,
-      data:data
+      data: data,
     })
       .then((res) => {
         setProfile(res.data);
@@ -65,9 +65,12 @@ function Profile() {
 
   return (
     <Layout>
-      <Form form={form} onFinish={(e)=>{
-        updateProfile(e)
-      }}>
+      <Form
+        form={form}
+        onFinish={(e) => {
+          updateProfile(e);
+        }}
+      >
         <Form.Item name="name">
           <Input placeholder="Name" />
         </Form.Item>

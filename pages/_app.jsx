@@ -6,7 +6,7 @@ import "tailwindcss/tailwind.css";
 import { ConfigProvider } from "antd";
 import axios from "axios";
 
-function App({ Component, pageProps }: AppProps): JSX.Element {
+function App({ Component, pageProps }) {
   axios.interceptors.request.use((config) => {
     let token = localStorage.getItem("token");
     config.headers["Authorization"] = `Bearer ${token}`;

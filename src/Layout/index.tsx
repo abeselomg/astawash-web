@@ -18,7 +18,7 @@ export function Indexlayout(props: any) {
 
   const [contentIndex, setContentIndex] = useState(0);
   
-  const [selectedKey, setSelectedKey] = useState<string>(typeof window !== 'undefined' ? window.localStorage.getItem('selectedKey') : '0');
+  const [selectedKey, setSelectedKey] = useState<any>(typeof window !== 'undefined' ? window.localStorage.getItem('selectedKey') : '0');
   const [breakpointBool, setBreakpointBool] = useState(false);
 
   const changeSelectedKey = (event: any, path = null) => {

@@ -11,6 +11,22 @@ interface DashCardType {
   value: number;
   route: string;
 }
+
+interface DashboardType {
+  count: any;
+  thisweek: any;
+}
+
+interface DashboardData {
+  [key: string]: any[];
+}
+interface CarData {
+  car_brand: {
+    name: string;
+  };
+  plate_number: string;
+}
+
 const DashCard = ({ name, value, route }: DashCardType) => {
   return (
     <div
@@ -32,7 +48,10 @@ const DashCard = ({ name, value, route }: DashCardType) => {
   );
 };
 function Dashboard() {
-  const [dashboard, setDashboard] = useState([]);
+  const [dashboard, setDashboard] = useState<DashboardType>({
+    count: null,
+    thisweek: null,
+  });
   const getDashboard = async () => {
     let orgId = localStorage.getItem("orgId");
     axios({
@@ -129,28 +148,34 @@ function Dashboard() {
           <div className="text-lg font-semibold  text-primary">
             Due this week
           </div>
-         
-          {Object.entries(dashboard?.thisweek || {}).map(([key, value]) => (
-            <div key={key}>
-              <Divider orientation="left">
-                <h2>
-                  {key.charAt(0).toUpperCase() + key.slice(1).replace("_", " ")}
-                </h2>
-              </Divider>
 
-              {value.length > 0 ? (
-                 <List
-                 size="small"
-                 
-                 bordered
-                 dataSource={value}
-                 renderItem={(item) => <List.Item>{item.car_brand.name}: {item.plate_number}</List.Item>}
-               />
-              ) : (
-                <p>No items available</p>
-              )}
-            </div>
-          ))}
+          {Object.entries(dashboard?.thisweek || {}).map(
+            ([key, value]: any) => (
+              <div key={key}>
+                <Divider orientation="left">
+                  <h2>
+                    {key.charAt(0).toUpperCase() +
+                      key.slice(1).replace("_", " ")}
+                  </h2>
+                </Divider>
+
+                {value.length > 0 ? (
+                  <List
+                    size="small"
+                    bordered
+                    dataSource={value}
+                    renderItem={(item: CarData) => (
+                      <List.Item>
+                        {item.car_brand.name}: {item.plate_number}
+                      </List.Item>
+                    )}
+                  />
+                ) : (
+                  <p>No items available</p>
+                )}
+              </div>
+            )
+          )}
         </div>
       </div>
     </Layout>
